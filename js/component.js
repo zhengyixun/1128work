@@ -132,7 +132,14 @@ var InfoSon=Vue.component("InfoSon",{
         </router-link>
     </li>
 </ul>
-`
+`,
+    beforeRouteEnter(to,from,next){
+        next();
+    },
+    beforeRouteLeave(to,from,next){
+        console.log(2);
+        next();
+    }
 })
 var con=Vue.component("con",{
     template:`<div>
@@ -152,7 +159,14 @@ var Doc=Vue.component("Doc",{
     <router-view name="left" class="left">leftc</router-view>
     <router-view name="right" class="right">RIGHT</router-view>
     </div>
-    `
+    `,
+    beforeRouteEnter(to,from,next){
+        next(function(vm){
+            if(!vm.get("login","name")){
+                router.push("/Logins");
+            }
+        })
+    }
 });
 var left=Vue.component("left",{
     template:`<div>
